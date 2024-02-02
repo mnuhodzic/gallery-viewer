@@ -1,0 +1,19 @@
+<div #favorites>
+  <mat-grid-list [cols]="columns" (window:resize)="setColumns()" rowHeight="1:1" gutterSize="10px">
+    <mat-grid-tile *ngFor="let id of favoriteIds">
+      <img
+        [src]="apiUrl + 'id/' + id + '/' + photoWidth + '/' + photoHeight"
+        [alt]="'Lorem Picsum Image Id:' + id"
+        (click)="handleFavoriteClick(id)"
+        matTooltip="Open"
+        [matTooltipShowDelay]="400"
+      />
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+
+<mat-card *ngIf="favoriteIds?.length === 0" class="no-data">
+  <mat-card-content>
+    <p>No favorite photos. Choose your favorite ones on the photos page!</p>
+  </mat-card-content>
+</mat-card>

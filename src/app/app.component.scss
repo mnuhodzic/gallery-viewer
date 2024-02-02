@@ -1,0 +1,36 @@
+@import "../variables.scss";
+
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: $dark-color;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001;
+}
+
+.app-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  button {
+    @include gallery-btn;
+    transition: transform 0.2s; /* Add smooth transition on transform property */
+
+    &.active {
+      color: $dark-color;
+      background-color: $light-color;
+      transform: scale(1.15); /* Increase size for active button */
+    }
+  }
+}
+
+.main {
+  margin-top: 67px;
+  padding: 20px;
+}

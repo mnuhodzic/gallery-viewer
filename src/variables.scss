@@ -1,0 +1,41 @@
+$primary-color: #777;
+$dark-color: #333;
+$light-color: #eee;
+
+@mixin empty-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: $light-color;
+  position: static;
+  box-shadow: none;
+  p {
+    color: $dark-color;
+    font-size: 24px;
+    text-align: center;
+    padding: 200px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+}
+
+@mixin grid-img {
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+}
+
+@mixin gallery-btn {
+  padding: 12px 20px;
+  margin: 10px 20px;
+  background-color: $primary-color;
+  color: $light-color;
+
+  &:hover {
+    color: $dark-color;
+    background-color: $light-color;
+  }
+}

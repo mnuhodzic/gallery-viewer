@@ -1,0 +1,20 @@
+@import "../../variables.scss";
+
+button {
+  @include gallery-btn;
+
+  &:hover {
+    border: 1.5px solid $dark-color;
+    padding: 10.5px 18.5px;
+  }
+}
+
+.favorite-image {
+  margin-left: 15vw;
+  margin-right: 15vw;
+
+  .centered-actions {
+    display: flex;
+    justify-content: center;
+  }
+}

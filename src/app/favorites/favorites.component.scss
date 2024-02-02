@@ -1,0 +1,9 @@
+@import "../../variables.scss";
+
+img {
+  @include grid-img;
+}
+
+.no-data {
+  @include empty-placeholder;
+}
