@@ -11,15 +11,15 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./photos.component.scss'],
 })
 export class PhotosComponent {
-  apiUrl = AppConfig.apiUrl;
-  photoWidth = AppConfig.photoWidth;
-  photoHeight = AppConfig.photoHeight;
+  private readonly apiUrl = AppConfig.apiUrl;
+  private readonly photoWidth = AppConfig.photoWidth;
+  private readonly photoHeight = AppConfig.photoHeight;
+  private pageNumber: number = 1;
+  private favorites: string[] = [];
   images: { id: string; url: string }[] = [];
-  favorites: string[] = [];
-  pageNumber: number = 1;
   isLoading: boolean = true;
-  @ViewChild('gallery', { static: true }) galleryRef?: ElementRef;
   columns: number = 5;
+  @ViewChild('gallery', { static: true }) private readonly galleryRef?: ElementRef;
 
   constructor(
     private photosService: PhotosService,
@@ -53,7 +53,7 @@ export class PhotosComponent {
   }
 
   private loadFavorites(): void {
-    this.favorites = this.favoritesService.loadFavoritesFromLocalStorage();
+    this.favorites = this.favoritesService.getFavorites();
   }
 
   setColumns() {
@@ -70,8 +70,8 @@ export class PhotosComponent {
     // Avoid duplicates before saving
     const uniqueFavorites = Array.from(new Set(this.favorites));
 
-    // Save the updated favorites array back to LocalStorage
-    localStorage.setItem('favorites', JSON.stringify(uniqueFavorites));
+    // Save the updated favorites array
+    this.favoritesService.setFavorites(uniqueFavorites);
 
     this.snackBar.open('Photo added to favorites', 'Close', {
       duration: 1600,

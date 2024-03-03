@@ -9,13 +9,13 @@ import { AppConfig } from '../config';
   styleUrls: ['./favorites.component.scss'],
 })
 export class FavoritesComponent {
-  apiUrl = AppConfig.apiUrl;
-  photoWidth = AppConfig.photoWidth;
-  photoHeight = AppConfig.photoHeight;
+  readonly apiUrl = AppConfig.apiUrl;
+  readonly photoWidth = AppConfig.photoWidth;
+  readonly photoHeight = AppConfig.photoHeight;
   favoriteIds: string[] = [];
-  @ViewChild('favorites', { static: true }) favoritesRef?: ElementRef;
   columns: number = 5;
-  
+  @ViewChild('favorites', { static: true }) private readonly favoritesRef?: ElementRef;
+
   constructor(
     private favoritesService: FavoritesService,
     private router: Router
@@ -27,12 +27,14 @@ export class FavoritesComponent {
   }
 
   private loadFavorites(): void {
-    this.favoriteIds = this.favoritesService.loadFavoritesFromLocalStorage();
+    this.favoriteIds = this.favoritesService.getFavorites();
   }
 
   setColumns() {
-    const columnsNum = Math.floor(this.favoritesRef?.nativeElement.clientWidth / 250);
-    this.columns = columnsNum <= 5 ? columnsNum : 5; 
+    const columnsNum = Math.floor(
+      this.favoritesRef?.nativeElement.clientWidth / 250
+    );
+    this.columns = columnsNum <= 5 ? columnsNum : 5;
   }
 
   handleFavoriteClick(imageId: string): void {

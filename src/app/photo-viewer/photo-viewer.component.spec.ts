@@ -21,8 +21,9 @@ describe('PhotoViewerComponent', () => {
       params: of({ id: '1' }),
     });
     favoritesServiceSpy = jasmine.createSpyObj('FavoritesService', [
+      'setFavorites',
+      'getFavorites',
       'removeFromFavorites',
-      'loadFavoritesFromLocalStorage',
     ]);
 
     TestBed.configureTestingModule({
@@ -43,7 +44,7 @@ describe('PhotoViewerComponent', () => {
   });
 
   it('should have a Remove from favorites button', () => {
-    component.imageId = '1';
+    component['imageId'] = '1';
     component.imageUrl = 'https://picsum.photos/id/1/450/450';
 
     fixture.detectChanges();
@@ -56,19 +57,19 @@ describe('PhotoViewerComponent', () => {
   });
 
   it('should initialize imageId and imageUrl on ngOnInit', () => {
-    expect(component.imageId).toBe('');
+    expect(component['imageId']).toBe('');
     expect(component.imageUrl).toBe('');
 
     fixture.detectChanges();
 
-    expect(component.imageId).toBe('1');
+    expect(component['imageId']).toBe('1');
     expect(component.imageUrl).toBe(
-      `https://picsum.photos/id/1/${component.photoWidth}/${component.photoHeight}`
+      `https://picsum.photos/id/1/${component['photoWidth']}/${component['photoHeight']}`
     );
   });
 
   it('should remove from favorites array and navigate to /favorites', () => {
-    component.imageId = '1';
+    component['imageId'] = '1';
 
     component.removeFromFavorites();
 

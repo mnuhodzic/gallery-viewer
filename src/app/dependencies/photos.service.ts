@@ -8,8 +8,8 @@ import { AppConfig } from '../config';
   providedIn: 'root',
 })
 export class PhotosService {
-  private apiUrl = AppConfig.apiUrl;
-  private numberOfPhotos = AppConfig.photosLimit;
+  private readonly apiUrl = AppConfig.apiUrl;
+  private readonly numberOfPhotos = AppConfig.photosLimit;
 
   constructor(private http: HttpClient) {}
 

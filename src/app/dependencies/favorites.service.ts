@@ -1,17 +1,22 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FavoritesService {
-  loadFavoritesFromLocalStorage(): string[] {
-    const favoritesStr = localStorage.getItem('favorites');
-    return favoritesStr ? JSON.parse(favoritesStr) : [];
+  private data = signal<Array<string>>([]);
+
+  setFavorites(favoritesArr: string[]) {
+    this.data.set(favoritesArr);
+  }
+
+  getFavorites(): string[] {
+    return this.data();
   }
 
   removeFromFavorites(id: string): void {
-    const favorites = this.loadFavoritesFromLocalStorage();
-    const updatedFavorites = favorites.filter(favoriteId => favoriteId !== id);
-    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+    this.data.update((favorites) =>
+      favorites.filter((favoriteId) => favoriteId !== id)
+    );
   }
 }

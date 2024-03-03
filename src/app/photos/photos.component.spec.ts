@@ -32,7 +32,8 @@ describe('PhotosComponent', () => {
       'getRandomImages',
     ]);
     favoritesServiceSpy = jasmine.createSpyObj('FavoritesService', [
-      'loadFavoritesFromLocalStorage',
+      'setFavorites',
+      'getFavorites',
     ]);
 
     TestBed.configureTestingModule({
@@ -53,10 +54,7 @@ describe('PhotosComponent', () => {
     fixture = TestBed.createComponent(PhotosComponent);
     component = fixture.componentInstance;
     photosServiceSpy.getRandomImages.and.returnValue(of([]));
-    favoritesServiceSpy.loadFavoritesFromLocalStorage.and.returnValue([
-      '1',
-      '2',
-    ]);
+    favoritesServiceSpy.getFavorites.and.returnValue(['1', '2']);
     fixture.detectChanges();
   });
 
@@ -73,14 +71,14 @@ describe('PhotosComponent', () => {
   it('should load favorites on ngOnInit', () => {
     fixture.detectChanges();
 
-    expect(component.favorites).toEqual(['1', '2']);
+    expect(component['favorites']).toEqual(['1', '2']);
   });
 
   it('should add image to favorites on handleImageClick', () => {
     const imageId = 'testImageId';
     component.handleImageClick(imageId);
 
-    expect(component.favorites).toEqual([imageId, '1', '2']);
+    expect(component['favorites']).toEqual([imageId, '1', '2']);
   });
 
   it('should display no data message when images are not loaded', () => {

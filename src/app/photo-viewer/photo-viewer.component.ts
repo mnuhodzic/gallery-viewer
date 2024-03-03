@@ -11,10 +11,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./photo-viewer.component.scss'],
 })
 export class PhotoViewerComponent {
-  apiUrl = AppConfig.apiUrl;
-  photoWidth = AppConfig.photoWidthBig;
-  photoHeight = AppConfig.photoHeightBig;
-  imageId: string = '';
+  private readonly apiUrl = AppConfig.apiUrl;
+  private readonly photoWidth = AppConfig.photoWidthBig;
+  private readonly photoHeight = AppConfig.photoHeightBig;
+  private imageId: string = '';
   imageUrl: string = '';
 
   constructor(

@@ -15,7 +15,7 @@ describe('FavoritesComponent', () => {
 
   beforeEach(() => {
     favoritesServiceSpy = jasmine.createSpyObj('FavoritesService', [
-      'loadFavoritesFromLocalStorage',
+      'getFavorites',
     ]);
     routerSpy = jasmine.createSpyObj('Router', ['navigate']);
 
@@ -30,7 +30,7 @@ describe('FavoritesComponent', () => {
 
     fixture = TestBed.createComponent(FavoritesComponent);
     component = fixture.componentInstance;
-    favoritesServiceSpy.loadFavoritesFromLocalStorage.and.returnValue([
+    favoritesServiceSpy.getFavorites.and.returnValue([
       '1',
       '2',
       '3',
