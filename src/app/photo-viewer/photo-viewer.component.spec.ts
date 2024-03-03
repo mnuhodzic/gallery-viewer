@@ -27,13 +27,13 @@ describe('PhotoViewerComponent', () => {
     ]);
 
     TestBed.configureTestingModule({
-      declarations: [PhotoViewerComponent],
-      providers: [ MatSnackBar,
-        { provide: ActivatedRoute, useValue: activatedRouteSpy },
-        { provide: Router, useValue: routerSpy },
-        { provide: FavoritesService, useValue: favoritesServiceSpy },
-      ],
-      imports: [MatCardModule, MatSnackBarModule, BrowserAnimationsModule],
+    providers: [
+          MatSnackBar,
+          { provide: ActivatedRoute, useValue: activatedRouteSpy },
+          { provide: Router, useValue: routerSpy },
+          { provide: FavoritesService, useValue: favoritesServiceSpy },
+        ],
+        imports: [MatCardModule, MatSnackBarModule, BrowserAnimationsModule, PhotoViewerComponent],
     }).compileComponents();
     fixture = TestBed.createComponent(PhotoViewerComponent);
     component = fixture.componentInstance;

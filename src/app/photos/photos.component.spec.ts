@@ -22,7 +22,10 @@ describe('PhotosComponent', () => {
   let photosServiceSpy: jasmine.SpyObj<PhotosService>;
   let favoritesServiceSpy: jasmine.SpyObj<FavoritesService>;
 
-  @Directive({ selector: '[appInfiniteScroll]' })
+  @Directive({
+    selector: '[appInfiniteScroll]',
+    standalone: true
+  })
   class appInfiniteScroll {
     @Input() stop?: boolean;
   }
@@ -37,17 +40,17 @@ describe('PhotosComponent', () => {
     ]);
 
     TestBed.configureTestingModule({
-      declarations: [PhotosComponent, appInfiniteScroll],
       providers: [
-        MatSnackBar,
-        { provide: PhotosService, useValue: photosServiceSpy },
-        { provide: FavoritesService, useValue: favoritesServiceSpy },
+          MatSnackBar,
+          { provide: PhotosService, useValue: photosServiceSpy },
+          { provide: FavoritesService, useValue: favoritesServiceSpy },
       ],
       imports: [
-        MatGridListModule,
-        MatProgressSpinnerModule,
-        BrowserAnimationsModule,
-        MatCardModule,
+          MatGridListModule,
+          MatProgressSpinnerModule,
+          BrowserAnimationsModule,
+          MatCardModule,
+          PhotosComponent, appInfiniteScroll,
       ],
     }).compileComponents();
 

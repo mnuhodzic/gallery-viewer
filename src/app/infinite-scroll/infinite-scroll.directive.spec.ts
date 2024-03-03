@@ -8,9 +8,11 @@ import { Component } from '@angular/core';
 import { InfiniteScrollDirective } from './infinite-scroll.directive';
 
 @Component({
-  template: `
-    <div appInfiniteScroll [stop]="stop" (nearEnd)="onNearEndScroll()"></div>
-  `,
+    template: `
+      <div appInfiniteScroll [stop]="stop" (nearEnd)="onNearEndScroll()"></div>
+    `,
+    standalone: true,
+    imports: [InfiniteScrollDirective]
 })
 class HostComponent {
   stop: boolean = false;
@@ -23,7 +25,7 @@ describe('InfiniteScrollDirective', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [InfiniteScrollDirective, HostComponent],
+      imports: [InfiniteScrollDirective, HostComponent],
     });
 
     fixture = TestBed.createComponent(HostComponent);

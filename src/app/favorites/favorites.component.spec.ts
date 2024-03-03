@@ -20,12 +20,11 @@ describe('FavoritesComponent', () => {
     routerSpy = jasmine.createSpyObj('Router', ['navigate']);
 
     TestBed.configureTestingModule({
-      declarations: [FavoritesComponent],
-      providers: [
+    providers: [
         { provide: FavoritesService, useValue: favoritesServiceSpy },
         { provide: Router, useValue: routerSpy },
       ],
-      imports: [MatGridListModule, MatCardModule, MatTooltipModule],
+      imports: [MatGridListModule, MatCardModule, MatTooltipModule, FavoritesComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(FavoritesComponent);

@@ -7,7 +7,8 @@ import {
 } from '@angular/core';
 
 @Directive({
-  selector: '[appInfiniteScroll]',
+    selector: '[appInfiniteScroll]',
+    standalone: true,
 })
 export class InfiniteScrollDirective {
   // notify parent element

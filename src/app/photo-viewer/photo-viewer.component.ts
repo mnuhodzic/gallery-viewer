@@ -4,12 +4,16 @@ import { FavoritesService } from '../dependencies/favorites.service';
 import { AppConfig } from '../config';
 import { take } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
-  selector: 'app-photo-viewer',
-  templateUrl: './photo-viewer.component.html',
-  styleUrls: ['./photo-viewer.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-photo-viewer',
+    templateUrl: './photo-viewer.component.html',
+    styleUrls: ['./photo-viewer.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [MatCardModule, MatButtonModule]
 })
 export class PhotoViewerComponent {
   private readonly apiUrl = AppConfig.apiUrl;

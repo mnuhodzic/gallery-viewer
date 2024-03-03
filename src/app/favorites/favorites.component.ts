@@ -7,12 +7,21 @@ import {
 import { FavoritesService } from '../dependencies/favorites.service';
 import { Router } from '@angular/router';
 import { AppConfig } from '../config';
+import { MatCardModule } from '@angular/material/card';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @Component({
-  selector: 'app-favorites',
-  templateUrl: './favorites.component.html',
-  styleUrls: ['./favorites.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-favorites',
+    templateUrl: './favorites.component.html',
+    styleUrls: ['./favorites.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        MatGridListModule,
+        MatTooltipModule,
+        MatCardModule,
+    ],
 })
 export class FavoritesComponent {
   readonly apiUrl = AppConfig.apiUrl;

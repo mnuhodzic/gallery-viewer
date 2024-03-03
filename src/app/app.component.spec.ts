@@ -15,17 +15,21 @@ describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
   let component: AppComponent;
 
-  @Component({ template: '' })
+  @Component({
+    template: '',
+    standalone: true
+  })
   class DummyComponent {}
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AppComponent, DummyComponent],
-      imports: [
+    imports: [
         RouterTestingModule.withRoutes([
-          { path: '', component: DummyComponent },
-          { path: 'favorites', component: DummyComponent },
+            { path: '', component: DummyComponent },
+            { path: 'favorites', component: DummyComponent },
         ]),
+        DummyComponent,
+        AppComponent,
       ],
     }).compileComponents();
 

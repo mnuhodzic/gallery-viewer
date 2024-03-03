@@ -10,12 +10,23 @@ import { AppConfig } from '../config';
 import { FavoritesService } from '../dependencies/favorites.service';
 import { delay, take } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatCardModule } from '@angular/material/card';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { InfiniteScrollDirective } from '../infinite-scroll/infinite-scroll.directive';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @Component({
-  selector: 'app-photos',
-  templateUrl: './photos.component.html',
-  styleUrls: ['./photos.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-photos',
+    templateUrl: './photos.component.html',
+    styleUrls: ['./photos.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        MatGridListModule,
+        InfiniteScrollDirective,
+        MatProgressSpinnerModule,
+        MatCardModule,
+    ],
 })
 export class PhotosComponent {
   private readonly apiUrl = AppConfig.apiUrl;
