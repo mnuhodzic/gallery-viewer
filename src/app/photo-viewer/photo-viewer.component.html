@@ -1,8 +1,10 @@
-<mat-card *ngIf="imageUrl" class="favorite-image">
-  <img mat-card-image [src]="imageUrl" alt="Favorite Image" />
-  <mat-card-actions class="centered-actions">
-    <button class="active" mat-button (click)="removeFromFavorites()">
-      Remove from favorites
-    </button>
-  </mat-card-actions>
-</mat-card>
+@if (imageUrl) {
+  <mat-card class="favorite-image">
+    <img mat-card-image [src]="imageUrl" alt="Favorite Image" />
+    <mat-card-actions class="centered-actions">
+      <button class="active" mat-button (click)="removeFromFavorites()">
+        Remove from favorites
+      </button>
+    </mat-card-actions>
+  </mat-card>
+}
