@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FavoritesService } from '../dependencies/favorites.service';
 import { AppConfig } from '../config';
@@ -9,6 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   selector: 'app-photo-viewer',
   templateUrl: './photo-viewer.component.html',
   styleUrls: ['./photo-viewer.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PhotoViewerComponent {
   private readonly apiUrl = AppConfig.apiUrl;

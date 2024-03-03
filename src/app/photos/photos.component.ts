@@ -1,4 +1,10 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  ViewChild,
+  signal,
+} from '@angular/core';
 import { PhotosService } from '../dependencies/photos.service';
 import { AppConfig } from '../config';
 import { FavoritesService } from '../dependencies/favorites.service';
@@ -9,6 +15,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   selector: 'app-photos',
   templateUrl: './photos.component.html',
   styleUrls: ['./photos.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PhotosComponent {
   private readonly apiUrl = AppConfig.apiUrl;
@@ -17,7 +24,7 @@ export class PhotosComponent {
   private pageNumber: number = 1;
   private favorites: string[] = [];
   images: { id: string; url: string }[] = [];
-  isLoading: boolean = true;
+  isLoading = signal<boolean>(true);
   columns: number = 5;
   @ViewChild('gallery', { static: true }) private readonly galleryRef?: ElementRef;
 
@@ -34,7 +41,7 @@ export class PhotosComponent {
   }
 
   private loadImages(): void {
-    this.isLoading = true;
+    this.isLoading.set(true);
     // random delay between 200ms and 300ms
     const randomDelay = Math.ceil(Math.random() * 100) + 200;
 
@@ -42,13 +49,14 @@ export class PhotosComponent {
       .getRandomImages(this.pageNumber)
       .pipe(delay(randomDelay), take(1))
       .subscribe((data) => {
-        const newImages = data.map((image) => ({
-          id: image.id,
-          url: `${this.apiUrl}id/${image.id}/${this.photoWidth}/${this.photoHeight}`,
-        }));
-        this.images = [...this.images, ...newImages];
+        data.forEach((image) => {
+          this.images.push({
+            id: image.id,
+            url: `${this.apiUrl}id/${image.id}/${this.photoWidth}/${this.photoHeight}`,
+          });
+        });
         this.pageNumber++;
-        this.isLoading = false;
+        this.isLoading.set(false);
       });
   }
 

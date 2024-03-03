@@ -1,26 +1,31 @@
-<div id="galleryId" appInfiniteScroll (nearEnd)="onNearEndScroll()" [stop]="isLoading" #gallery>
+<div id="galleryId" #gallery>
   <mat-grid-list [cols]="columns" (window:resize)="setColumns()" rowHeight="1:1" gutterSize="10px">
-    @for (image of images; track image.id) {
+    @for (image of images; track $index) {
       <mat-grid-tile>
-        <img
-          [src]="image.url"
-          [alt]="'Lorem Picsum Image Id:' + image.id"
-          (click)="handleImageClick(image.id)"
-          matTooltip="Add to favorites"
-          [matTooltipShowDelay]="400"
-          />
+        @if($index !== images.length - 1) {
+          <img [src]="image.url" [alt]="'Lorem Picsum Image Id:' + image.id" (click)="handleImageClick(image.id)"/>
+        } @else {
+          <!-- To avoid unnecessary change detection, load infinite scroll only when last image is in viewport -->
+          @defer(on viewport) {
+            <img appInfiniteScroll (nearEnd)="onNearEndScroll()" [stop]="isLoading()"
+              [src]="image.url" [alt]="'Lorem Picsum Image Id:' + image.id" (click)="handleImageClick(image.id)"
+            />
+          } @placeholder {
+            <img [src]="image.url" [alt]="'Lorem Picsum Image Id:' + image.id" (click)="handleImageClick(image.id)"/>
+          }
+        }
       </mat-grid-tile>
     }
   </mat-grid-list>
 </div>
 
-@if (isLoading) {
+@if (isLoading()) {
   <div class="loading-overlay">
     <mat-spinner color="accent"></mat-spinner>
   </div>
 }
 
-@if (images.length === 0 && !isLoading) {
+@if (images.length === 0 && !isLoading()) {
   <mat-card class="no-data">
     <mat-card-content>
       <p>No photos loaded. Please refresh the page!</p>

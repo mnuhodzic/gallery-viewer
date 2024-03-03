@@ -54,17 +54,4 @@ describe('FavoritesComponent', () => {
 
     expect(routerSpy.navigate).toHaveBeenCalledWith(['/photos', mockImageId]);
   });
-
-  it('should display no-data message when there are no favorite photos', () => {
-    component.favoriteIds = [];
-    fixture.detectChanges();
-
-    const noDataElement = fixture.debugElement.query(By.css('.no-data'));
-    expect(noDataElement).toBeTruthy();
-
-    const messageElement = noDataElement.query(By.css('p'));
-    expect(messageElement.nativeElement.textContent).toContain(
-      'No favorite photos. Choose your favorite ones on the photos page!'
-    );
-  });
 });

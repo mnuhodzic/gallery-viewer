@@ -1,4 +1,9 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  ViewChild,
+} from '@angular/core';
 import { FavoritesService } from '../dependencies/favorites.service';
 import { Router } from '@angular/router';
 import { AppConfig } from '../config';
@@ -7,6 +12,7 @@ import { AppConfig } from '../config';
   selector: 'app-favorites',
   templateUrl: './favorites.component.html',
   styleUrls: ['./favorites.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FavoritesComponent {
   readonly apiUrl = AppConfig.apiUrl;

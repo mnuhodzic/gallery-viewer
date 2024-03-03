@@ -82,7 +82,7 @@ describe('PhotosComponent', () => {
   });
 
   it('should display no data message when images are not loaded', () => {
-    component.isLoading = false;
+    component.isLoading.set(false);
     component.images = [];
 
     fixture.detectChanges();
