@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { MatButtonModule } from '@angular/material/button';
+import { RouterOutlet } from '@angular/router';
+import { HeaderComponent } from './header/header.component';
 
 @Component({
     selector: 'app-root',
@@ -8,10 +8,8 @@ import { MatButtonModule } from '@angular/material/button';
     styleUrls: ['./app.component.scss'],
     standalone: true,
     imports: [
-        MatButtonModule,
-        RouterLink,
-        RouterLinkActive,
         RouterOutlet,
+        HeaderComponent
     ],
 })
 export class AppComponent {}
