@@ -1,4 +1,4 @@
-# GalleryTemplate
+# Gallery
 
 This project is photo viewer app - Gallery, that fetches images from https://picsum.photos/.
 When user scrolls, new images are loaded - infinite scroll. Clicking on the images will add it to Favorites.
